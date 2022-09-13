@@ -7,18 +7,16 @@
 // @lc code=start
 class Solution {
     public int maxProfit(int[] prices) {
-        int l = prices.length - 1;
-        if(l <= 0)return 0;
-        int s = 0,max = 0;
-        for(int j = 0; j < l; j++){
-            for(int i = 1; i < l; i++){
-                if(prices[j] < prices[j + i]) {
-                    s = prices[i + j] - prices[i];
-                }
-                max = s > max ? s : max;
+        int minprice = Integer.MAX_VALUE;//记录最低点
+        int maxprofit = 0;//最大利润
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice) {
+                minprice = prices[i];//最低点
+            } else if (prices[i] - minprice > maxprofit) {
+                maxprofit = prices[i] - minprice;//更新最大利润
             }
         }
-        return max;
+        return maxprofit;
     }
 }
 // @lc code=end
